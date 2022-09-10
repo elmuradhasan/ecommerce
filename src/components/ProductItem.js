@@ -28,7 +28,7 @@ export default function ProductItem({product,cart,setcart}) {
     <img className='item_bg' src={product.image} alt="products"/>
     <div className='previewall flex'>
       <button onClick={() =>setOpen(true) }>Preview</button>
-      <i class="fa-solid fa-cart-shopping" onClick={()=>addtocart(product)}></i>
+      <i className="fa-solid fa-cart-shopping" onClick={()=>addtocart(product)}></i>
     </div>
   </div>
   <h3>{product.title}</h3>

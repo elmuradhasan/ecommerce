@@ -2,6 +2,7 @@ import { useState,useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
 import All from "./style/All.css";
+import responsive from "./style/responsive.css";
 import Choose from './components/Choose';
 import Products from './components/Products';
 import Footer from './components/Footer';
@@ -19,7 +20,7 @@ function App() {
   return (
     <>
       <main className='floating full_w'>
-      <Header cart={cart} />
+      <Header cart={cart} setcart={setcart} />
        <Choose/>
        <Products cart={cart} setcart={setcart} />
        <Allproduct cart={cart} setcart={setcart}/>

@@ -1,13 +1,24 @@
 import React, {useState,useEffect} from 'react';
 import {Modal} from 'antd';
-import { toast,ToastContainer } from 'react-toastify';
+import { toast} from 'react-toastify';
 export default function Productone({product,cart,setcart}) {
   useEffect(() => {
     localStorage.setItem("cart",JSON.stringify(cart));
   }, [cart])
   const addtocart = (product)=>{
-    setcart([...JSON.parse(localStorage.getItem("cart")),product]);
-     toast.success("Element added cart");
+    if (JSON.parse(localStorage.getItem("cart")).filter(item=>item.id === product.id).length  > 0) {
+       setcart([...JSON.parse(localStorage.getItem("cart")).map((items,ind)=>{
+             return {
+                ...items,
+                count: items.count + 1
+             }
+       })]);
+       toast.error("Element count increased");
+    }else{
+       setcart([...JSON.parse(localStorage.getItem("cart")),product]);
+       toast.success("Element added cart");
+
+    }
   }
   const [open,setOpen] = useState(false);
   return ( <>
@@ -16,7 +27,7 @@ export default function Productone({product,cart,setcart}) {
                         <img className='item_bg' src={product.image} alt="pr1"/>
                         <div className='preview flex'>
                           <button onClick={()=>setOpen(true)}>Preview</button>
-                          <i class="fa-solid fa-cart-shopping" onClick={()=>addtocart(product)}></i>
+                          <i className="fa-solid fa-cart-shopping" onClick={()=>addtocart(product)}></i>
                         </div>
                       </div>
                       <h3>{product.title}</h3>
@@ -41,17 +52,7 @@ export default function Productone({product,cart,setcart}) {
     <button className='open_add_to' onClick={()=>addtocart(product)}>Add to Cart</button>
     </div>
   </Modal>
-  <ToastContainer
-position="bottom-left"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-/>
+
 </div>
    </>
   )
