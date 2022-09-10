@@ -52,6 +52,10 @@
   .item_for_allproduct img {
     width: 280px;
   }
+  .swiper-pagination{
+    position: relative !important;
+    margin-top: 90px !important;
+  }
 }
 @media (max-width: 1000px) {
   .item_for_allproduct {
